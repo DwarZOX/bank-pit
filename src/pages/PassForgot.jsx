@@ -10,98 +10,104 @@ const PassForgot = () => {
   const [newPass, setNewPass] = useState('')
   const [confirmNewPass, setConfirmNewPass] = useState('')
   const [id, setId] = useState('')
+  const [isShow, setIsShow] = useState(false)
   const pageWillDisplay = () => {
     if(page === 1) {
       return <Form value={email} text={'Masukan email yang terdaftar pada akun Bank PIT Anda'} type={'email'} placeholder={'Masukan alamat email'} onChange={setEmail} setPage={setPage} handleSubmit={handleSubmit}/> 
     } else if(page === 2){
       return <Form value={code} onChange={setCode} text={'Masukan kode yang telah kami kirim di email Anda'} placeholder={'Masukan kode'} type={'number'} setPage={setPage} handleSubmit={handleSubmit}/>
     } else if(page === 3){
-      return <Form newPass={newPass} setNewPass={setNewPass} type={'password'} confirmNewPass={confirmNewPass} setConfirmPass={setConfirmNewPass}/>
+      return <Form newPass={newPass} isShow={isShow} setIsShow={setIsShow} setNewPass={setNewPass} text={'Silahkan buat kata sandi baru Anda.'}  type={'password'} confirmNewPass={confirmNewPass} setConfirmPass={setConfirmNewPass}/>
     } else if (page === 4){
-      return <div><h1>Berhasil menggati kata sandi</h1></div>
+      return <div className="mx-5 md:mx-0 w-[250px]"><h1 className="font-bold text-center">Berhasil mengganti <br /> kata sandi. <br /> Silahkan masuk kembali</h1></div>
     }
   }
-  console.log(newPass,confirmNewPass)
+  
   const handleSubmit = (e) => {
-    e.preventDefault()
-    if(email !== ''){
+    e.preventDefault();
+
+    if (page === 1) {
+      if (email !== '') {
+        let data = new FormData();
+        data.append('email', email);
+
+        let config = {
+          method: 'post',
+          maxBodyLength: Infinity,
+          url: '/tokenulang',
+          headers: {},
+          data: data
+        };
+
+        instance.request(config)
+          .then((response) => {
+            setPage(2);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      } else {
+        alert('Email wajib diisi');
+      }
+    }
+
+    if (page === 2) {
+      if (code === '') {
+        alert('Harap masukan kode');
+      } else {
+        let data = new FormData();
+        data.append('token', code);
+
+        let config = {
+          method: 'post',
+          maxBodyLength: Infinity,
+          url: '/tokenpassword',
+          headers: {},
+          data: data
+        };
+
+        instance.request(config)
+          .then((response) => {
+            console.log(response.data.message);
+            setId(response.data.data);
+            setPage(3);
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }
+    }
+
+    if (page === 3) {
+      if (newPass === '' && confirmNewPass === ''){
+        alert('Isikan kata sandi baru')
+      } else if (newPass !== confirmNewPass){
+        setIsShow(!isShow)
+      } else {
       let data = new FormData();
-      data.append('email', email);
+      data.append('password', newPass);
+      data.append('password_confirmation', confirmNewPass);
+      data.append('id', id);
 
       let config = {
         method: 'post',
         maxBodyLength: Infinity,
-        url: '/tokenulang',
+        url: '/passworddepan',
         headers: {},
-        data : data
+        data: data
       };
 
       instance.request(config)
-      .then((response) => {
-        setPage(2)
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-
-    } else {
-      alert('email wajib diisi')
+        .then((response) => {
+          console.log(JSON.stringify(response.data));
+          setPage(4);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+      }
     }
-
-    if(page === 2){
-      if(code === ''){
-        alert('Harap masukan kode')
-        setPage(2)
-      }  else {
-        let data = new FormData();
-data.append('token', code);
-
-let config = {
-  method: 'post',
-  maxBodyLength: Infinity,
-  url: '/tokenpassword',
-  headers: {},
-  data : data
-};
-
-instance.request(config)
-.then((response) => {
-  console.log(response.data.message)
-  setId(response.data.data);
-        return setPage(3)
-})
-.catch((error) => {
-  console.log(error);
-});
-    }
-
-      } else if(page === 3){
-        
-        let data = new FormData();
-data.append('password', newPass);
-data.append('password_confirmation', confirmNewPass);
-data.append('id', id);
-
-let config = {
-  method: 'post',
-  maxBodyLength: Infinity,
-  url: '/passworddepan',
-  headers: {},
-  data : data
-};
-
-instance.request(config)
-.then((response) => {
-  console.log(JSON.stringify(response.data));
-  setPage(4)
-})
-.catch((error) => {
-  console.log(error);
-});
-
-    }
-    
-  }
+  };
   return (
     <>
     <div className=" absolute right-0 left-0 top-0">
