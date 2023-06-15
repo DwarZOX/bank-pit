@@ -1,7 +1,25 @@
 import { Link } from "react-router-dom"
 import { Footer, Navbar } from "../components"
+import { useStateContext } from "../context/StateContext"
+import { useEffect } from "react"
 
 const Help = () => {
+  const {setRole,setDisplayName,loggedIn,setLoggedIn} = useStateContext()
+
+  useEffect(() => {
+    const checkIsLoggedIn = () => {
+      const userToken = localStorage.getItem("token")
+      const role = localStorage.getItem("role")
+      const fullName = localStorage.getItem("full_name")
+      if(userToken || (userToken !== null)) {
+        setLoggedIn(true)
+        setRole(role)
+        setDisplayName(fullName)
+      } 
+    }
+    checkIsLoggedIn()
+  }, [])
+
   return (
     <>
       <div className=" absolute right-0 left-0 top-0">
@@ -33,7 +51,7 @@ const Help = () => {
           <p className="text-[14px] md:text-[19px]">Anda bisa mengatur ulang kata sandi/password <Link to={'/help/passforgot'} className="text-[15px] md:text-[27px] md:hover:text-red-700 font-bold underline">di sini</Link></p>
         </span>
       </div>
-      
+
       <Footer/>
     </>
   )

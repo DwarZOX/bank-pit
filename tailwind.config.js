@@ -5,7 +5,12 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      content: {
+        'arrowLeft': 'url("../../assets/img/leftarrow.png")',
+        'arrowRight': 'url("../../assets/img/rightarrow.png")'
+      }
+    },
   },
   variants: {
     extend: {

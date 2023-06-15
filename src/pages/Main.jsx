@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
 import { About, BtnCustom, Cards, Carousel, Contact, Footer, Join, Navbar, Promotion } from "../components";
-import { MdOutlineArrowForwardIos, MdOutlineArrowBackIos } from "react-icons/md";
 import Banner1 from "../assets/img/Cover.png";
 import Banner2 from "../assets/img/Cover1.png";
 import vidBanner from '../assets/video/video-banner.mp4'

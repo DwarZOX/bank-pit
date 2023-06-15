@@ -2,7 +2,7 @@ import inforek from '../assets/img/inforek2.png'
 import tabungan from '../assets/img/tabungan.png'
 import transfer from '../assets/img/transfer.png'
 import setorTunai from '../assets/img/setor-tunai.png'
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import Aos from "aos";
 import 'aos/dist/aos.css'
 const Feature = () => {

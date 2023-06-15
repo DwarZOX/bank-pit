@@ -13,7 +13,7 @@ import instance from '../../api/api'
   const Login = ({close}) => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
-    const {setRole,setLoggedIn} = useStateContext()
+    const {setRole,setDisplayName,setLoggedIn} = useStateContext()
   
 
 

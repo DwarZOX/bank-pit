@@ -7,8 +7,9 @@ export const StateContext = ({children}) => {
     const [loggedIn, setLoggedIn] = useState(false)
     const [role, setRole] = useState('')
     const [displayName, setDisplayName] = useState('')
+    const [isShow, setIsShow] = useState(false)
 return (
-    <Context.Provider value={{loggedIn,setLoggedIn,role,setRole,displayName,setDisplayName}}>
+    <Context.Provider value={{loggedIn,setLoggedIn,role,setRole,displayName,setDisplayName,isShow,setIsShow}}>
         {children}
     </Context.Provider>
 )

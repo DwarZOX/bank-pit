@@ -5,7 +5,6 @@ import {MdSupervisedUserCircle} from 'react-icons/md'
 import { Link } from 'react-router-dom'
 import Swal from 'sweetalert2'
 import 'animate.css'
-import axios from 'axios'
 import { useStateContext } from '../context/StateContext'
 import instance from '../api/api'
 
@@ -139,6 +138,7 @@ import instance from '../api/api'
           })
           setOnclick(false)
        } //end func handleLoggout
+
     
   return (
     <>

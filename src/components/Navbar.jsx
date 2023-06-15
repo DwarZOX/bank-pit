@@ -2,7 +2,7 @@ import { FiMenu } from "react-icons/fi";
 import { GrClose } from "react-icons/gr";
 import LogoPIT from "../assets/img/logopit1.png";
 import BtnLogin from "./BtnLogin";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import Login from "./modals/Login";
 import Logout from "./modals/Logout";
