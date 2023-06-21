@@ -66,7 +66,7 @@ const Carousel = ({ media }) => {
                 {item.type === 'video' ? (
                   <video src={item.source} className="w-full h-[40vh] md:h-auto object-cover object-[-105px] sm:odd:object-[-895px] odd:object-[-0px] md:odd:object-[-0px]" loop autoPlay muted />
                 ) : (
-                  <img src={item.source} className="w-full h-[40vh] md:h-auto object-cover object-[-115px] sm:object-[-95px] md:object-center" alt="Carousel Image" />
+                  <img src={item.source} className="w-full h-[40vh] md:h-auto object-cover object-[-10px] sm:object-[-95px] md:object-center" alt="Carousel Image" />
                 )}
               </div>
             ))}

@@ -22,7 +22,6 @@ import instance from '../../api/api'
     }
     const handleLogin = (e) => {
       close(false)
-        e.preventDefault()
         if(username === '' && password === ''){
           const Toast = Swal.mixin({
            toast: true,

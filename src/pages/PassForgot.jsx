@@ -76,13 +76,33 @@ const PassForgot = () => {
             })
           });
       } else {
-        alert('Email wajib diisi');
+        const Toast = Swal.mixin({
+          toast: true,
+          position: 'top',
+          showConfirmButton: false,
+          timer: 3000,
+          timerProgressBar: true,
+        })
+        Toast.fire({
+          icon: 'warning',
+          title: 'Harap masukan email!'
+        })
       }
     }
 
     if (page === 2) {
       if (code === '') {
-        alert('Harap masukan kode');
+        const Toast = Swal.mixin({
+          toast: true,
+          position: 'top',
+          showConfirmButton: false,
+          timer: 3000,
+          timerProgressBar: true,
+        })
+        Toast.fire({
+          icon: 'warning',
+          title: 'Harap masukan kode OTP!'
+        })
       } else {
         let data = new FormData();
         data.append('token', code);
@@ -102,14 +122,34 @@ const PassForgot = () => {
             setPage(3);
           })
           .catch((error) => {
-            console.log(error);
+            const Toast = Swal.mixin({
+              toast: true,
+              position: 'top',
+              showConfirmButton: false,
+              timer: 3000,
+              timerProgressBar: true,
+            })
+            Toast.fire({
+              icon: 'warning',
+              title: 'Kode OTP tidak valid!'
+            })
           });
       }
     }
 
     if (page === 3) {
       if (newPass === '' && confirmNewPass === ''){
-        alert('Isikan kata sandi baru')
+        const Toast = Swal.mixin({
+          toast: true,
+          position: 'top',
+          showConfirmButton: false,
+          timer: 3000,
+          timerProgressBar: true,
+        })
+        Toast.fire({
+          icon: 'warning',
+          title: 'Masukan kata sandi baru!'
+        })
       } else if (newPass !== confirmNewPass){
         setIsShow(!isShow)
       } else {
@@ -128,7 +168,7 @@ const PassForgot = () => {
 
       instance.request(config)
         .then((response) => {
-          console.log(JSON.stringify(response.data));
+          console.log(response.data.message);
           setPage(4);
         })
         .catch((error) => {
@@ -154,15 +194,13 @@ const PassForgot = () => {
          
         {elemWillDisplay()}
         
-        <BtnCustom type={'submit'} className={'bg-black max-w-fit h-10 md:h-[40px] px-2 text-white mt-5 rounded-lg border-[1.5px] border-b-4 border-slate-600 active:border-b-0 items-center gap-x-1 md:mb-10'} value={'LANJUT'}/>
+        {page !== 4  && (<BtnCustom type={'submit'} className={'bg-black max-w-fit h-10 md:h-[40px] px-2 text-white mt-5 rounded-lg border-[1.5px] border-b-4 border-slate-600 active:border-b-0 items-center gap-x-1 md:mb-10'} value={'LANJUT'}/>)}
         </form>
        </div>
       </div>
     </div>
     <div className="h-[20vh]"></div>
-    {/* <div className="absolute bottom-0 left-0 right-0"> */}
       <Footer/>
-    {/* </div> */}
     </>
   )
 }

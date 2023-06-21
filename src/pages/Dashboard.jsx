@@ -70,8 +70,8 @@ let config = {
 
 instance.request(config)
 .then((response) => {
-  setDataInfo(response.data.username[0])
-  setDataHistory(response.data.history[0])
+  setDataInfo(response.data.username)
+  setDataHistory(response.data.no_ref)
 })
 .catch((error) => {
   console.log(error);
@@ -86,8 +86,12 @@ instance.request(config)
                         <div className='flex bg-slate-100 h-10 rounded-xl mx-10 md:mx-5 border-2 md:my-5'><Input className={'bg-transparent border-none w-[200px] md:w-[500px] [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none'} placeholder={'Cari dengan no_ref'} type={'number'} value={search} eventOnChange={setSearch} classNameWrap={'border-none'}/><button  onClick={handleSearch}><MdSearch className='text-[35px] text-slate-500'/></button></div>
                     </div>
 
-                    <div className='border-2 border-yellow-400 mx-3 md:mx-40 mt-10 md:mt-20 max-h-[76vh] md:max-h-[70vh] rounded-lg overflow-y-auto'>
+                    {dataHistory ? (<div className='border-2 border-yellow-400 mx-3 md:mx-40 mt-10 md:mt-20 max-h-[76vh] md:max-h-[70vh] rounded-lg overflow-y-auto'>
                     <div className="px-6 py-4 text-center">
+          <div className="mb-4 md:flex justify-between">
+            <h1 className="text-gray-600 font-semibold italic">No_Reff</h1>
+            <p className="font-bold capitalize">{dataHistory.no_ref}</p>
+          </div>
           <div className="mb-4 md:flex justify-between">
             <h1 className="text-gray-600 font-semibold italic">ID Pengguna</h1>
             <p className="font-bold capitalize">{dataHistory.id_user}</p>
@@ -97,19 +101,19 @@ instance.request(config)
             <p className="font-bold capitalize">{dataHistory.username}</p>
           </div>
           <div className="mb-4 md:flex justify-between">
-            <h1 className="text-gray-600 font-semibold italic">No_Reff</h1>
-            <p className="font-bold capitalize">{dataHistory.no_ref}</p>
+            <h1 className="text-gray-600 font-semibold italic">Jumlah</h1>
+            <p className="font-bold capitalize">{dataHistory.uang}</p>
           </div>
           <div className="mb-4 md:flex justify-between">
             <h1 className="text-gray-600 font-semibold italic">Transaksi</h1>
-            <p className="font-bold capitalize">{dataHistory.keterangan}</p>
+            <p className="font-bold capitalize">{dataHistory.transaksi}</p>
           </div>
           <div className="mb-4 md:flex justify-between">
             <h1 className="text-gray-600 font-semibold italic">Waktu</h1>
             <p className="font-bold">{dataHistory.waktu}</p>
           </div>
                     </div>
-                    </div>
+                    </div>) : (<h1 className='text-[19px] font-bold mt-[50%] md:mt-[25%] italic bg-slate-500 w-fit py-2 px-3 rounded-3xl mx-auto text-white'>Data tidak ada</h1>)}
                     
         </>
             
@@ -120,7 +124,7 @@ instance.request(config)
                             <div className='flex bg-slate-100 h-10 rounded-xl mx-10 md:mx-5 border-2 md:my-5'><Input className={'bg-transparent border-none w-[200px] md:w-[500px]'} placeholder={'Cari dengan nama pengguna'} value={search} eventOnChange={setSearch} classNameWrap={'border-none'}/><button onClick={handleSearch}><MdSearch className='text-[35px] text-slate-500'/></button></div>
                         </div>
 
-                        <div className='border-2 border-yellow-400 mx-3 md:mx-40 mt-10 md:mt-20 max-h-[76vh] md:max-h-[70vh] rounded-lg overflow-y-auto'>
+                        {dataInfo ? <div className='border-2 border-yellow-400 mx-3 md:mx-40 mt-10 md:mt-20 max-h-[76vh] md:max-h-[70vh] rounded-lg overflow-y-auto'>
                         <div className="px-6 py-4 text-center">
           <div className="mb-4 md:flex justify-between">
             <h1 className="text-gray-600 font-semibold italic">Nama Depan</h1>
@@ -159,7 +163,7 @@ instance.request(config)
             <p className="font-bold capitalize">{dataInfo.alamat_lengkap}</p>
           </div>
         </div>
-                    </div>
+                    </div> : <h1 className='text-[19px] font-bold mt-[50%] md:mt-[25%] italic bg-slate-500 w-fit py-2 px-3 rounded-3xl mx-auto text-white'>Data tidak ada</h1>}
             </>
         } else {
             return <>

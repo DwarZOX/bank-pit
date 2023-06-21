@@ -101,7 +101,7 @@ const MyAccount = ({setShow}) => {
                     <p className="mt-3">No Reff : {i.no_ref}</p>
                     <p>Waktu : {i.waktu}</p>
                     <p>Transaksi : {i.keterangan}</p>
-                    <p>Debit : {i.waktu}</p>
+                    <p>Debit : {i.uang}</p>
                     <p className="mb-3">Keterangan : {i.transaksi}</p>
                     <hr />
                   </div>

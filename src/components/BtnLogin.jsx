@@ -122,7 +122,7 @@ import instance from '../api/api'
               instance
               .request(config)
               .then((response) => {
-                console.log(JSON.stringify(response.data.message));
+                console.log(response.data.message);
                 localStorage.clear()
                 setLoggedIn(false)
                 Swal.fire(
